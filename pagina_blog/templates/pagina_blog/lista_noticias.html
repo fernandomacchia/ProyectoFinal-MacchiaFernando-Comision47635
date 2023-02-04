@@ -1,0 +1,61 @@
+{% extends "pagina_blog/base.html" %}
+
+{% block subtitulo %}Noticias{% endblock subtitulo %}
+
+{% block contenido %}
+
+<CENTER>
+    <h1>BLOG DE NOTICIAS</h1>
+    <h4>Las noticias más destacadas de tecnología</h4>
+    <br><br>
+</CENTER>
+
+<!--<h4>Bienvenid@ {{ request.user.first_name }}</h4><br> -->
+
+
+<div class="text-black-50 text-lg-end" >
+
+<a href="{% url 'publicar_noticias' %} ">Publicar nueva Noticia</a>
+<br>
+
+</div>
+
+<h6>Buscador de Noticias</h6>
+<form action="{% url 'buscar_noticias' %}" method="post" class="form-text">
+  {% csrf_token %}
+  <input type="text" name="titulo">
+  <input type="submit" value="Buscar">
+</form>
+<div class="text-body">Ingrese el texto a buscar</div>
+<br>
+
+
+
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Titulo</th>
+            <td>Ver</td>
+            <td>Editar</td>
+            <td>Eliminar</td>
+        </tr>
+        {% for noticia in noticias %}
+        <tr>
+            <td>{{ noticia.titulo }}</td>
+            <td>
+                <a href="{% url 'ver_noticia' noticia.id %}">Ver</a>
+            </td>
+            {% if user.id == noticia.usuario.id %}
+            <td>
+                <a href="{% url 'editar_noticia' noticia.id%}">Editar</a>
+            </td>
+            <td>
+                <a href="{% url 'eliminar_noticia' noticia.id%}">Eliminar</a>
+            </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock contenido %}

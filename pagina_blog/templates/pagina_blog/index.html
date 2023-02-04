@@ -1,0 +1,15 @@
+{% extends "pagina_blog/base.html" %}
+
+{% block subtitulo %}Inicio{% endblock subtitulo %}
+
+{% block contenido %}
+
+
+<form action="{% url 'buscar_noticias' %}" method="post" class="form-text">
+  {% csrf_token %}
+  <input type="text" name="titulo">
+  <input type="submit" value="Buscar">
+</form>
+<br>
+
+{% endblock contenido %}

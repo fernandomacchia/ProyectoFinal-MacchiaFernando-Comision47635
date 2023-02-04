@@ -1,0 +1,28 @@
+{% extends "pagina_blog/base.html" %}
+
+{% block subtitulo %}Noticias{% endblock subtitulo %}
+
+{% block contenido %}
+<h2>{{noticia.titulo}}</h2>
+<h5>{{noticia.subtitulo}}</h5>
+<br>
+<h6>Autor: {{noticia.autor}}</h6>
+<h6>Fecha: {{noticia.fecha_publicacion}}</h6>
+<br>
+<div class="img-thumbnail">
+    <img src="{{noticia.imagen.url}}" width="100%" />
+    <h7>{{noticia.imagen_texto}}</h7>
+
+</div>  
+<br>
+<br>
+<span>{{noticia.cuerpo}}</span>
+<br>
+<br>
+
+<a href="{% url 'listar_noticias' %}">Volver a la lista</a>
+
+
+
+
+{% endblock contenido %}

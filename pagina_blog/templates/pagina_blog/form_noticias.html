@@ -1,0 +1,36 @@
+{% extends "pagina_blog/base.html" %}
+
+{% block subtitulo %}Publicar Noticias{% endblock subtitulo %}
+
+{% block contenido %}
+
+<CENTER>
+    <h1>BLOG DE NOTICIAS</h1>
+    <h4>Las noticias más destacadas de tecnología</h4><br>
+    <h6>Publicar nueva noticia</h6><br><br>
+</CENTER>
+
+<div class="align-content-md-around">
+    <form method="post" enctype="multipart/form-data" class="form-text">
+    {% csrf_token %}  
+        {% for field in form.visible_fields %}
+            <div class="form-text">
+                <label for="id_{{ field.name }}">{{ field.label }}:</label>
+                {{ field }}
+
+                {% if field.errors %}
+                    <small>
+                        {% for error in field.errors %}
+                            <p class="text text-danger">{{ error|escape }}</p>
+                        {% endfor %}
+                    </small>
+                    {% endif %}
+    
+                </div>
+            {% endfor %}
+    <input type="submit" value="Enviar"/>
+    <input type="hidden" name="usuario" value="{{ request.user.pk }}"/>
+    </form>
+    {{ request.user }}
+</div>
+{% endblock contenido %}
